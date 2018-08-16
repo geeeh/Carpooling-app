@@ -1,0 +1,29 @@
+AllCops:
+  Include:
+    - 'app/**/*'
+    - 'test/**/*'
+
+  Excludes:
+    - config
+    - config/*
+    - config/**/*
+    - bin/*
+    - 'app/assets/**/*'
+    - 'app/views/**/*'
+    - '**/*.yml'
+    - 'bin/**/*'
+
+Metrics/LineLength:
+  Max: 95
+
+MethodLength:
+  Max: 35
+
+Metrics/AbcSize:
+  Enabled: false
+
+BlockLength:
+  Max: 70
+
+Documentation:
+  Enabled: false

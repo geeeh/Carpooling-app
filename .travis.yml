@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+  - 2.5.1
+addons:
+  postgresql: 9.6
+  code_climate:
+    repo_token: d08c7809a03cf695812eb8bf4c81189d261f073a
+after_success:
+  - bundle exec codeclimate-test-reporter
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
+script:
+  - bin/rails db:migrate RAILS_ENV=test
+  - bin/rails test

@@ -1,0 +1,37 @@
+<%= render 'partials/navbar' %>
+<div class="container index">
+  <div class="row">
+    <div class="heading">
+      <h4>Registered vehicles</h4>
+    </div>
+    <%= link_to 'Add vehicle', new_vehicle_path, class: "btn btn-outline-success ml-auto" %>
+  </div>
+
+  <div class="vehicle-list">
+  <table class="table vehicles table-borderless">
+    <thead>
+    <tr>
+      <th scope="col">Number plate</th>
+      <th scope="col">Make/Model</th>
+      <th scope="col">Colour</th>
+      <th scope="col">Capacity</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @vehicles.each do |f| %>
+      <tr data-link="<%= rides_path %>" class="ride-rows">
+        <th scope="row"><%= f.plate %></th>
+        <td><%= f.make %></td>
+        <td><%= f.colour %></td>
+        <td><%= f.capacity %></td>
+        <td class="last-child">
+          <%=link_to  image_tag('trash.svg'), vehicle_path(f), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= image_tag 'writing.svg' %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>

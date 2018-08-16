@@ -1,0 +1,104 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree .
+ */
+@import "bootstrap";
+@import "fonts";
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+body {
+  top: 0;
+  padding: 0 !important;
+  font-family: 'Kievit_book', sans-serif;
+}
+
+.sign {
+  background: linear-gradient(to right, #373B44, #4286f4);
+  height: 100vh;
+}
+
+.navbar-brand {
+  font-family: 'Pacifico', cursive;
+}
+
+.cover {
+  img {
+    width: 50px;
+    height: auto;
+    top: 50%;
+    transform: perspective(1px) translateY(50%);
+  }
+}
+
+nav  {
+  ul{
+    li{
+      border-right: solid 1px #CCCCCC;
+      padding: 0 30px;
+    }
+    li:first-child {
+      border-left: solid 1px #CCCCCC;
+    }
+    li:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.center {
+  margin: 0 17%;
+}
+.signup,
+.signin {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 3px;
+  box-shadow: 3px 3px 3px 3px rgba(68, 68, 68, 0.6);
+  top: 50%;
+  width: 30%;
+  margin: 0 auto;
+  position: relative;
+  transform: perspective(1px) translateY(50%);
+  .btn {
+    width: 200px;
+    box-shadow: 3px 3px 3px rgba(68, 68, 68, 0.6);
+  }
+  .icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: -70px auto 30px auto;
+    background: #ffffff;
+    text-align: center;
+    box-shadow: 3px 3px 3px rgba(68, 68, 68, 0.6);
+  }
+  form {
+    input {
+      height: 60px;
+      &.btn {
+        text-align: center;
+        margin: 20px;
+        height: 40px;
+        width: 200px;
+        padding: 0 20px;
+        box-shadow: 3px 3px 3px rgba(68, 68, 68, 0.6);
+      }
+    }
+  }
+}
+
+.app-first-name{
+  color: #B00100;
+}
+
+
+
