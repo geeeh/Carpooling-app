@@ -8,4 +8,6 @@ class Vehicle < ApplicationRecord
     minimum: 6,
     maximum: 8
   }, uniqueness: true
+
+  has_many :rides, class_name: 'ride', foreign_key: 'vehicle_id'
 end

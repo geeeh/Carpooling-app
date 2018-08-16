@@ -3,7 +3,7 @@
 class VehiclesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @vehicles = Vehicle.all
+    @vehicles = Vehicle.where(user_id: current_user)
   end
 
   def new
@@ -15,12 +15,13 @@ class VehiclesController < ApplicationController
   end
 
   def create
-    @vehicle = Vehicle.new(vehicle_params)
-    if @vehicle.save
+    vehicle = Vehicle.new(vehicle_params)
+    vehicle.user_id = current_user.id
+    if vehicle.save
       flash[:notice] = 'vehicles added!'
-      redirect_to root_url
+      redirect_to action: 'index'
     else
-      flash[:error] = 'Failed to create new vehicles!'
+      flash[:error] = vehicle.errors.messages
       render :new
     end
   end

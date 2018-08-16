@@ -18,6 +18,9 @@
       <div class="form-group">
         <%= vehicle.label :plate %><br />
         <%= vehicle.text_field :plate, class: "form-control", placeholder: "KBZ 001S" %>
+        <% if flash[:error] %>
+          <p class="error"> Plate <%= flash[:error][:plate][0] %> </p>
+        <% end %>
       </div>
       <div class="form-group">
         <%= vehicle.label :capacity %><br />
