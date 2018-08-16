@@ -1,0 +1,60 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.row{
+  margin: 20px 0;
+  .heading {
+    width: 160px;
+    border-bottom: solid 3px #ffc107;
+  }
+  form input {
+    border: none;
+    background: #f8f8fa;
+    //box-shadow: 2px 2px 2px rgba(68, 68, 68, 0.6);
+    font-family: 'Kievit_book', sans-serif;
+    cursor: text;
+    user-focus: opacity(0.9);
+  }
+}
+
+.rides-table {
+  margin: 20px auto;
+  border-collapse:separate;
+  border-spacing:0 20px;
+  thead th {
+    text-align: center;
+    border: none;
+  }
+  tr.ride-rows {
+    border-right: solid 1px #4286f4 !important;
+    td {
+      .badge {
+        position: absolute;
+      }
+    }
+    td, th {
+      padding: 20px auto 20px auto;
+      border-top: solid 1px #4286f4 !important;
+      border-bottom: solid 1px #4286f4 !important;
+      text-align: center;
+    }
+
+    td.last-child {
+      border-right: solid 1px #4286f4 !important ;
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+
+
+    }
+    th {
+      border-left: solid 1px #4286f4 !important ;
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+    &:hover {
+      td.last-child{
+        border-right: solid 4px #4286f4 !important ;
+      }
+    }
+  }
+}

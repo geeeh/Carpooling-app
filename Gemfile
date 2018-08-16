@@ -39,19 +39,40 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# use devise for authentication
+gem 'devise'
+
+# Add bootstrap
+gem 'bootstrap'
+gem 'jquery-rails'
+
+# postgres
+gem 'pg'
+
 group :development, :test do
+<<<<<<< HEAD
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
   # console
+=======
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+>>>>>>> [Feat #159620929] enable user login
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
+<<<<<<< HEAD
   # Access an interactive console on exception pages or by calling 'console'
   # anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the
   # background. Read more: https://github.com/rails/spring
+=======
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+>>>>>>> [Feat #159620929] enable user login
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end

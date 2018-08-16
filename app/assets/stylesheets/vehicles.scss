@@ -1,0 +1,71 @@
+// Place all the styles related to the Vehicle controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.new {
+  .row {
+    .heading {
+      width: 250px !important;
+    }
+  }
+}
+
+.index {
+  .row {
+    .heading {
+      width: 195px !important;
+    }
+  }
+}
+
+.vehicle-list {
+  top: 30%;
+  margin: 0 auto;
+  position: relative;
+  transform: perspective(1px) translateY(30%);
+}
+
+.car-reg-form {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 3px;
+  box-shadow: 3px 3px 3px 3px rgba(68, 68, 68, 0.6);
+  top: 30%;
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  transform: perspective(1px) translateY(30%);
+}
+
+.vehicles {
+  margin: 20px auto;
+  border-collapse:separate;
+  border-spacing:0 20px;
+  thead th {
+    text-align: center;
+    border: none;
+  }
+  tr.ride-rows {
+    background: #f8f8fa;
+
+    td, th {
+      height: 70px;
+      padding-top: 20px !important;
+      text-align: center;
+    }
+
+    td.last-child {
+      border-right: solid 1px #4286f4 !important ;
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    th {
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+    &:hover {
+      td.last-child{
+        border-right: solid 4px #4286f4 !important ;
+      }
+    }
+  }
+}

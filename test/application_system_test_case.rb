@@ -1,4 +1,9 @@
 # frozen_string_literal: true
+<<<<<<< HEAD
+=======
+
+require 'test_helper'
+>>>>>>> [Feat #159620929] enable user login
 
 require 'test_helper'
 
