@@ -2,6 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+$(document).ready(function() {
   $("tr[data-link]").click(function() {
-          window.location = $(this).data("link")
-      })
+    window.location = $(this).data("link")
+  })
+})

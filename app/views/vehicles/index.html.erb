@@ -27,7 +27,7 @@
         <td><%= f.capacity %></td>
         <td class="last-child">
           <%=link_to  image_tag('trash.svg'), vehicle_path(f), method: :delete, data: { confirm: 'Are you sure?' } %>
-          <%= image_tag 'writing.svg' %>
+          <%=link_to  image_tag('writing.svg'), edit_vehicle_path(f.id) %>
         </td>
       </tr>
     <% end %>

@@ -1,1 +1,37 @@
 <%= render 'partials/navbar' %>
+  <div class="container edit">
+    <div class="row">
+      <div class="heading">
+        <h4>Edit registration</h4>
+      </div>
+    </div>
+    <div class="car-reg-form">
+      <%= form_with scope: :vehicle, url: vehicle_path, method: :put , local: true, class: "nifty_form" do |vehicle| %>
+        <div class="form-group">
+          <%= vehicle.label :make %><br />
+            <%= vehicle.text_field :make, class: "form-control", placeholder: "Toyota vitz" %>
+        </div>
+        <div class="form-group">
+          <%= vehicle.label :colour %><br />
+            <%= vehicle.text_field :colour, class: "form-control", placeholder: "blue" %>
+        </div>
+        <div class="form-group">
+          <%= vehicle.label :plate %><br />
+            <%= vehicle.text_field :plate, class: "form-control", placeholder: "KBZ 001S" %>
+              <% if flash[:error] %>
+                <p class="error"> Plate
+                  <%= flash[:error][:plate][0] %>
+                </p>
+                <% end %>
+        </div>
+        <div class="form-group">
+          <%= vehicle.label :capacity %><br />
+            <%= vehicle.text_field :capacity, class: "form-control", placeholder: "4" %>
+        </div>
+        <div class="form-group">
+          <%= vehicle.submit "Register vehicle", class: "btn btn-success" %>
+        </div>
+        <% end %>
+    </div>
+
+  </div>
