@@ -5,6 +5,7 @@ require 'date'
 # HomeController class is responsible for all Home actions.
 class HomeController < ApplicationController
   before_action :authenticate_user!
+
   def index
     date = Time.now
     @rides = Ride.where('time > ?', date)

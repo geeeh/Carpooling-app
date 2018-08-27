@@ -3,6 +3,7 @@
 # Ride controller class
 # This is the controller responsible on all Ride actions.
 class RidesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @rides = Ride.all
   end

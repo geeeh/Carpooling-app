@@ -2,6 +2,7 @@
 
 class VehiclesController < ApplicationController
   before_action :authenticate_user!
+
   def index
     @vehicles = Vehicle.where(user_id: current_user)
   end
@@ -15,8 +16,7 @@ class VehiclesController < ApplicationController
   end
 
   def create
-    vehicle = Vehicle.new(vehicle_params)
-    vehicle.user_id = current_user.id
+    vehicle = current_user.vehicles.build(vehicle_params)
     if vehicle.save
       flash[:notice] = 'vehicles added!'
       redirect_to action: 'index'
@@ -51,6 +51,8 @@ class VehiclesController < ApplicationController
       render :destroy
     end
   end
+
+  private
 
   # we used strong parameters for the validation of params
   def vehicle_params
