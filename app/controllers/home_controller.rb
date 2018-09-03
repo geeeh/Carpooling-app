@@ -8,7 +8,9 @@ class HomeController < ApplicationController
 
   def index
     date = Time.now
-    @rides = Ride.where('time > ?', date)
+    @vehicle_id =
+      @rides = Ride.where('time > ?', date).where('remaining_capacity >?', 0)
+    redirect_to account_index_path if current_user.account.nil?
   end
 
   def show
@@ -16,7 +18,14 @@ class HomeController < ApplicationController
   end
 
   def search
-    @rides = Ride.where(from: params[:from], to: params[:to])
-    redirect_to root_path
+    @rides = Ride.where('lower(origin) like lower(?) OR lower(destination) like lower(?)',
+                        search_params[:origin], search_params[:destination])
+    render :index
+  end
+
+  private
+
+  def search_params
+    params.require(:search).permit(:origin, :destination)
   end
 end

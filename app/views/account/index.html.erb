@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+    <div class="heading"><h4>User Account</h4>
+      </div>
+    <% if(@account) %>
+    <%= link_to  "update account details", edit_account_path(@account.id), class: "ml-auto btn btn-outline-primary"%>
+    <% else %>
+    <%= link_to  "Add account details", new_account_path, class: "ml-auto btn btn-outline-success"%>
+    <% end %>
+    </div>
+    <% if(@account) %>
+    Email:
+        <p><%= current_user.email %></p>
+
+     Full Name:
+      <p> <%= @account.first_name + " " + @account.last_name %> </p>
+
+      Identification:
+        <p><%= @account.identification %></p>
+
+      phone:
+        <p><%= @account.phone_number %></p>
+    <% else %>
+      <p>You have no account details. Add account details</p>
+    <% end %>
+    </div>

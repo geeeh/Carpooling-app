@@ -1,9 +1,10 @@
 RSpec.describe RidesController, type: :controller do
-
 context "when not signed in" do
+  let(:vehicle) { create(:vehicle) }
+
   describe 'GET #index' do
     before(:each) do
-      get :index
+      get vehicle_rides_path(vehicle.id)
     end
     it 'returns a status code of 302' do
       expect(response.status).to eq 302
@@ -19,7 +20,7 @@ context "when already signed in" do
   describe 'GET #index' do
     login_user
     before(:each) do
-      get :index
+      get vehicle_rides_path(vehicle.id)
     end
 
     it 'returns a status code of 200' do

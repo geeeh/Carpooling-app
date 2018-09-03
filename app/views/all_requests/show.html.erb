@@ -1,0 +1,51 @@
+<div class="container new">
+  <div class="row">
+    <div class="heading">
+      <h4>Ride details</h4>
+    </div>
+  </div>
+
+  <div>
+    Ride information
+    <h6>Time: </h6>
+    <p><%= @ride.time.to_formatted_s(:short) %></p>
+    <h6>Start point: </h6>
+    <p><%= @ride.origin %></p>
+    <h6>Destination: </h6>
+    <p><%= @ride.destination %></p>
+
+    <hr />
+    <h6><b>Requests made</b></h6>
+<% if @requests.empty? %>
+  No requests have been made to this ride yet.
+<% else %>
+    <div class="">
+      <table class="table table-borderless">
+        <thead>
+        <tr>
+          <th scope="col">first Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">pickup</th>
+          <th scope="col">drop off</th>
+          <th scope="col">Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @requests.each do |f| %>
+          <tr class="ride-rows">
+            <td><%= f.user.account.first_name %></td>
+            <td><%= f.user.account.last_name %></td>
+            <td><%= f.pickup %></td>
+            <td> <%= f.dropoff %> </td>
+            <td><%= f.user.account.phone_number %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% end %>
+
+  </div>
+  </div>
+
+</div>

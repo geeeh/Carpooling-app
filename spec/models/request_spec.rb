@@ -3,7 +3,7 @@ RSpec.describe Request, type: :model do
   context "validations" do
     context "presence" do
       it { should validate_presence_of :pickup }
-      it { should validate_presence_of :status }
+      it { should validate_presence_of :dropoff }
     end
   end
 

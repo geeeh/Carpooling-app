@@ -7,6 +7,9 @@
   </div>
 
   <div class="vehicle-list">
+   <% if @vehicles.empty? %>
+          No Vehicles added yet. Please add a vehicle.
+    <% else %>
   <table class="table vehicles table-borderless">
     <thead>
     <tr>
@@ -19,12 +22,13 @@
     </thead>
     <tbody>
     <% @vehicles.each do |f| %>
-      <tr data-link="<%= rides_path %>" class="ride-rows">
+      <tr class="ride-rows">
         <th scope="row"><%= f.plate %></th>
         <td><%= f.make %></td>
         <td><%= f.colour %></td>
         <td><%= f.capacity %></td>
         <td class="last-child">
+          <%=link_to  image_tag('plus.svg'), vehicle_rides_url(f.id) %>
           <%=link_to  image_tag('trash.svg'), vehicle_path(f), method: :delete, data: { confirm: 'Are you sure?' } %>
           <%=link_to  image_tag('writing.svg'), edit_vehicle_path(f.id) %>
         </td>
@@ -32,5 +36,6 @@
     <% end %>
     </tbody>
   </table>
+  <% end %>
   </div>
 </div>

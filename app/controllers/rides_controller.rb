@@ -5,7 +5,8 @@
 class RidesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @rides = Ride.all
+    @vehicle_id = params[:vehicle_id]
+    @rides = Ride.where(vehicle_id: @vehicle_id)
   end
 
   def new
@@ -21,15 +22,14 @@ class RidesController < ApplicationController
   end
 
   def create
-    ride = Ride.new(ride_params)
-    ride.user_id = current_user.id
-    if ride.save
+    @vehicle = Vehicle.find(params[:vehicle_id])
+    @ride = @vehicle.rides.build(ride_params)
+    if @ride.save!
       flash[:notice] = 'ride added!'
-      redirect_to action: 'index'
     else
-      flash[:error] = ride.errors.messages
-      render :new
+      flash[:alert] = @ride.errors.messages
     end
+    redirect_to action: 'index'
   end
 
   def update
@@ -38,23 +38,35 @@ class RidesController < ApplicationController
       flash[:notice] = 'ride updated!'
       redirect_to action: 'index'
     else
-      flash[:error] = 'Failed to edit ride!'
+      flash[:alert] = 'Failed to edit ride!'
       render :edit
     end
   end
 
   def destroy
     ride = Ride.find(params[:id])
-    if ride.delete
-      flash[:notice] = 'Ride deleted!'
-      redirect_to action: 'index'
+    requests = ride.requests
+    if ride.destroy
+      flash[:notice] = 'Ride canceled!'
+      requests.each do |request|
+        notify_requester(request.user.account.phone_number)
+      end
     else
-      flash[:error] = 'Failed to delete this vehicles!'
-      render :destroy
+      flash[:alert] = 'Failed to delete this vehicles!'
     end
+    redirect_to action: 'index'
   end
 
   def ride_params
-    params.require(:ride).permit(:time, :remaining_capacity, :to, :from)
+    params.require(:ride).permit(:time, :remaining_capacity, :destination, :origin)
+  end
+
+  def notify_requester(number)
+    nexmo = Nexmo::Client.new
+    nexmo.sms.send(
+      from: 'Carpooling App',
+      to: number,
+      text: 'Your ride has been canceled please visit carpooling app to book another.'
+    )
   end
 end

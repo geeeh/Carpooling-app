@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <div class="heading"><h4>Rides page</h4>
+  </div>
+  <%= link_to  "create new ride", vehicle_rides_path, { class: "btn btn-outline-success ml-auto" , "data-toggle" => "modal", "data-target" => "#exampleModalCenter"}   %>
+  </div>
+ <% if @rides.empty? %>
+        You have no rides for this vehicle yet.
+  <% else %>
+  <table class="table rides table-borderless">
+    <thead>
+    <tr>
+      <th scope="col">Time</th>
+      <th scope="col">remaining capacity</th>
+      <th scope="col">From</th>
+      <th scope="col">Destination</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @rides.each do |f| %>
+      <tr class="ride-rows">
+        <th scope="row"><%= f.time.to_formatted_s(:short) %></th>
+        <td><%= f.remaining_capacity %></td>
+        <td><%= f.origin %></td>
+        <td><%= f.destination %></td>
+        <td class="last-child">
+          <%=link_to  image_tag('trash.svg'), vehicle_ride_path(f.vehicle.id, f.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%=link_to  image_tag('writing.svg'), edit_vehicle_ride_path(f.vehicle.id, f.id) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% end %>
+
+  </div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <%= form_with scope: :ride, url: vehicle_rides_path, local: true, class: "nifty_form" do |request| %>
+          <div class="form-group">
+            <%= request.label :time %><br />
+            <%= request.datetime_local_field :time, class: "form-control", placeholder: "departure time" %>
+          </div>
+          <%= request.hidden_field :vehicle_id, value: @vehicle_id %>
+          <div class="form-group">
+            <%= request.label :remaining_capacity %><br />
+            <%= request.text_field :remaining_capacity, class: "form-control", placeholder: "1" %>
+          </div>
+          <div class="form-group">
+            <%= request.label :origin %><br />
+            <%= request.text_field :origin, class: "form-control", placeholder: "start point" %>
+          </div>
+        <div class="form-group">
+            <%= request.label :destination %><br />
+            <%= request.text_field :destination, class: "form-control", placeholder: "destination" %>
+        </div>
+              <%= request.submit "create new ride", class: "btn btn-success" %>
+            <% end %>
+      </div>
+    </div>
+  </div>
+</div>
