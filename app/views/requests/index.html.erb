@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="heading"><h4>Requests page</h4>
+  </div>
+  <%= link_to  "make request", ride_requests_url(@ride.id), { class: "btn btn-outline-success ml-auto" , "data-toggle" => "modal", "data-target" => "#exampleModalCenter"}   %>
+  </div>
+<div class="row">
+  <div class="card">
+    <h5>Driver Details</h5>
+    <%= @driver.email %>
+  </div>
+
+  <div class="card">
+    <h5>Vehicle Details</h5>
+    <p> colour: <%= @ride.vehicle.colour %></p>
+    <p> Number plate: <%= @ride.vehicle.plate %></p>
+    <p> Make: <%= @ride.vehicle.make %></p>
+  </div>
+
+  <div class="card">
+    <h5>Ride Details</h5>
+    <p> Departure time: <%= @ride.time.to_formatted_s(:short) %></p>
+    <p> Remaining seats: <%= @ride.remaining_capacity %></p>
+    <p> Start point: <%= @ride.from %></p>
+    <p> End point: <%= @ride.to %></p>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <%= form_with scope: :request, url: ride_requests_path(@ride, @request), local: true, class: "nifty_form" do |request| %>
+              <div class="form-group">
+                  <%= request.label :phone %><br />
+                  <%= request.text_field :phone, class: "form-control", placeholder: "+2547.." %>
+              </div>
+              <div class="form-group">
+                  <%= request.label :pickup %><br />
+                  <%= request.text_field :pickup, class: "form-control", placeholder: "pickup point" %>
+                </div>
+              <div class="form-group">
+                  <%= request.label :dropoff %><br />
+                  <%= request.text_field :dropoff, class: "form-control", placeholder: "drop off point" %>
+              </div>
+              <%= request.submit "request ride", class: "btn btn-success" %>
+            <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><span class="app-first-name">Carpooling</span><span class="app-second-name">App</span> </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <span class="notice"><%= notice %></span>
+  <span class="alert"><%= alert %></span>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <%= link_to "Home", home_index_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Vehicle", vehicles_path, class: "nav-link"%>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Account</a>
+      </li>
+      <li class="nav-item active">
+        <%= link_to 'sign out', destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
+      </li>
+    </ul>
+
+  </div>
+</nav>

@@ -10,6 +10,9 @@
   </head>
 
   <body>
-    <%= yield %>
+      <% if controller.controller_name != "registrations" and controller.controller_name != "sessions" %>
+        <%= render 'partials/navbar' %>
+      <% end %>
+  <%= yield %>
   </body>
 </html>

@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+  <div class="heading"><h4>Available Rides</h4>
+    </div>
+  <form class="ml-auto">
+    <div class="form-row">
+      <div class="col">
+        <input type="search" class="form-control" name="" placeholder="From">
+      </div>
+      <div class="col">
+        <input type="search" class="form-control" placeholder="Destination">
+      </div>
+    </div>
+  </form>
+  </div>
+  <div>
+      <table class="table rides-table">
+        <thead>
+        <tr>
+          <th scope="col">Ride start time</th>
+          <th scope="col">Starting point</th>
+          <th scope="col">End point</th>
+          <th scope="col">Remaining capacity</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @rides.each do |f| %>
+          <tr class="ride-rows">
+            <th scope="row"><%= f.time.to_formatted_s(:short) %></th>
+            <td><%= f.from %></td>
+            <td><%= f.to %></td>
+            <td>
+              <%= image_tag 'team.svg' %>
+              <span class="badge badge-primary"><%= f.remaining_capacity %></span>
+            </td>
+            <td class="last-child"><%= link_to  "request", ride_requests_url(f.id), class: "btn btn-secondary" %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+  </div>
+</div>
