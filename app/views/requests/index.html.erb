@@ -2,27 +2,26 @@
   <div class="row">
     <div class="heading"><h4>Requests page</h4>
   </div>
-  <%= link_to  "make request", ride_requests_url(@ride.id), { class: "btn btn-outline-success ml-auto" , "data-toggle" => "modal", "data-target" => "#exampleModalCenter"}   %>
   </div>
-<div class="row">
   <div class="card">
-    <h5>Driver Details</h5>
-    <%= @driver.email %>
-  </div>
+      <h6>Driver Details</h6>
+      <b>Email: </b><%= @driver.email %>
+      <hr />
 
-  <div class="card">
-    <h5>Vehicle Details</h5>
-    <p> colour: <%= @ride.vehicle.colour %></p>
-    <p> Number plate: <%= @ride.vehicle.plate %></p>
-    <p> Make: <%= @ride.vehicle.make %></p>
-  </div>
+    <h6>Vehicle Details</h6>
+    <b> colour: </b><%= @ride.vehicle.colour %>
+    <b> Number plate: </b><%= @ride.vehicle.plate %>
+    <b> Make: </b><%= @ride.vehicle.make %>
 
-  <div class="card">
-    <h5>Ride Details</h5>
-    <p> Departure time: <%= @ride.time.to_formatted_s(:short) %></p>
-    <p> Remaining seats: <%= @ride.remaining_capacity %></p>
-    <p> Start point: <%= @ride.from %></p>
-    <p> End point: <%= @ride.to %></p>
+    <hr />
+    <h6>Ride Details</h6>
+    <b> Departure time: </b> <%= @ride.time.to_formatted_s(:short) %>
+    <b> Remaining seats: </b><%= @ride.remaining_capacity %>
+    <b> Start point: </b><%= @ride.origin %>
+    <b> Destination: </b><%= @ride.destination %>
+
+    <%= link_to  "make request", vehicle_ride_requests_url(@ride.vehicle, @ride.id), { class: "btn btn-outline-success ml-auto" , "data-toggle" => "modal", "data-target" => "#exampleModalCenter"}   %>
+
   </div>
 </div>
 </div>
@@ -31,11 +30,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
-          <%= form_with scope: :request, url: ride_requests_path(@ride, @request), local: true, class: "nifty_form" do |request| %>
-              <div class="form-group">
-                  <%= request.label :phone %><br />
-                  <%= request.text_field :phone, class: "form-control", placeholder: "+2547.." %>
-              </div>
+          <%= form_with scope: :request, url: vehicle_ride_requests_path(@ride.vehicle.id, @ride.id), local: true, class: "nifty_form" do |request| %>
               <div class="form-group">
                   <%= request.label :pickup %><br />
                   <%= request.text_field :pickup, class: "form-control", placeholder: "pickup point" %>

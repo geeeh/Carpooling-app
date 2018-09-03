@@ -2,14 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .card{
-  width: 40%;
+  width: 60%;
   min-height: 200px;
   background: #F5F5F5;
   float: left;
   margin: 20px;
   border: none;
   padding: 20px;
+  h6 {
+    margin: 10px 0;
+    color: cadetblue;
+  }
 }
 .btn-custom {
   float: right;
+}
+
+img {
+  margin: 7px;
 }

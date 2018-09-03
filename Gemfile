@@ -39,7 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # use devise for authentication
 gem 'devise'
-
+gem 'nexmo'
 # Add bootstrap
 gem 'bootstrap'
 gem 'jquery-rails'
@@ -61,6 +61,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'coveralls'
   gem 'simplecov'
+  gem 'dotenv-rails'
 end
 
 group :development do

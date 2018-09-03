@@ -1,10 +1,10 @@
 RSpec.describe Ride, type: :model do
   context "validations" do
     context "presence" do
-      it { should validate_presence_of :time }
+      it {  validate_presence_of :time }
       it { should validate_presence_of :remaining_capacity }
-      it { should validate_presence_of :from }
-      it { should validate_presence_of :to }
+      it { should validate_presence_of :origin }
+      it { should validate_presence_of :destination }
     end
   end
   context "associations" do

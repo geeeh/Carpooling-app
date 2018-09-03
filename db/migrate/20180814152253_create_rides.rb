@@ -5,9 +5,9 @@ class CreateRides < ActiveRecord::Migration[5.2]
     create_table :rides do |t|
       t.datetime :time
       t.integer :remaining_capacity
-      t.string :from
-      t.string :to
-      t.belongs_to :vehicles, index: true
+      t.string :origin
+      t.string :destination
+      t.belongs_to :vehicle, index: true
       t.timestamps
     end
   end

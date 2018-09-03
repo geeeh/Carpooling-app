@@ -2,18 +2,24 @@
   <div class="row">
   <div class="heading"><h4>Available Rides</h4>
     </div>
-  <form class="ml-auto">
+        <%= form_with scope: :search, url: home_search_url, local: true, class: "nifty_form ml-auto" do |request| %>
     <div class="form-row">
       <div class="col">
-        <input type="search" class="form-control" name="" placeholder="From">
+          <%= request.search_field :origin, class: "form-control", placeholder: "From" %>
       </div>
       <div class="col">
-        <input type="search" class="form-control" placeholder="Destination">
+        <%= request.search_field :destination, class: "form-control", placeholder: "Destination" %>
+      </div>
+      <div class="col">
+        <%= request.submit "search", class: "btn btn-search" %>
       </div>
     </div>
-  </form>
+  <% end %>
   </div>
   <div>
+  <% if @rides.empty? %>
+        No rides available.
+  <% else %>
       <table class="table rides-table">
         <thead>
         <tr>
@@ -28,17 +34,24 @@
         <% @rides.each do |f| %>
           <tr class="ride-rows">
             <th scope="row"><%= f.time.to_formatted_s(:short) %></th>
-            <td><%= f.from %></td>
-            <td><%= f.to %></td>
+            <td><%= f.origin %></td>
+            <td><%= f.destination %></td>
             <td>
               <%= image_tag 'team.svg' %>
               <span class="badge badge-primary"><%= f.remaining_capacity %></span>
             </td>
-            <td class="last-child"><%= link_to  "request", ride_requests_url(f.id), class: "btn btn-secondary" %></td>
+             <td class="last-child">
+            <% if f.vehicle.user.id == current_user.id %>
+            <%= link_to  "cancel", vehicle_ride_path(f.vehicle_id, f.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+            <% else %>
+            <%= link_to  "request", vehicle_ride_requests_url(f.vehicle_id, f.id), class: "btn btn-secondary" %>
+            <% end %>
+            </td>
           </tr>
         <% end %>
         </tbody>
       </table>
+      <% end %>
 
   </div>
 </div>

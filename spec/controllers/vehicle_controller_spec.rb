@@ -35,6 +35,30 @@ RSpec.describe VehiclesController, type: :controller do
         expect(response).to render_template('layouts/application')
       end
     end
+
+    describe 'GET #new' do
+      login_user
+      it 'returns a status code of 200' do
+        get :new
+        expect(response.status).to eq 200
+      end
+    end
+
+    describe 'POST #create' do
+      before do
+        post :create, params: {
+          vehicle: attributes_for(:vehicle)
+        }
+      end
+
+      it 'returns a status code of 302' do
+        expect(response.status).to eq 302
+      end
+
+      it 'redirects to index' do
+        expect(response).to redirect_to vehicles_path
+      end
+    end
   end
 
 end

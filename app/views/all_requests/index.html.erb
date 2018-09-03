@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="row">
+  <div class="heading upcoming"><h4>All rides you have requested</h4>
+    </div>
+  </div>
+  <div>
+  <% if @user_requests.empty? %>
+     You have not requested any rides
+  <% else %>
+      <table class="table rides-table">
+        <thead>
+        <tr>
+          <th scope="col">Ride start time</th>
+          <th scope="col">pickup</th>
+          <th scope="col">dropoff</th>
+          <th scope="col">vehicle</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @user_requests.each do |f| %>
+          <tr class="ride-rows">
+            <th scope="row"><%= f.ride.time.to_formatted_s(:short) %></th>
+            <td><%= f.pickup %></td>
+            <td><%= f.dropoff %></td>
+            <td>
+              <%= f.ride.vehicle.plate %>
+            </td>
+            <% if f.ride.time > Time.now %>
+              <td class="last-child"><%= link_to  "cancel", vehicle_ride_request_url(f.ride.vehicle.id, f.ride.id, f.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+              <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <% end %>
+  </div>
+
+   <div class="row">
+    <div class="heading my-rides"><h4>Rides you have offered</h4>
+      </div>
+    </div>
+    <div>
+    <% if @user_rides.empty? %>
+    You have not created any rides
+    <% else %>
+        <table class="table rides-table">
+          <thead>
+          <tr>
+            <th scope="col">Ride start time</th>
+            <th scope="col">vehicle plate</th>
+            <th scope="col">pickup</th>
+            <th scope="col">dropoff</th>
+            <th scope="col">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @user_rides.each do |f| %>
+            <tr class="ride-rows">
+              <th scope="row"><%= f.time.to_formatted_s(:short) %></th>
+              <td><%= f.vehicle.plate %></td>
+              <td><%= f.origin %></td>
+              <td>
+                <%= f.destination %>
+              </td>
+              <td class="last-child">
+              <% if f.time > Time.now %>
+                 <%= link_to  "cancel", vehicle_ride_path(f.vehicle_id, f.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+              <% end %>
+
+              <%= link_to "ride details", all_request_path(f.id), class: "btn btn-outline-primary" %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <% end %>
+
+    </div>
+</div>

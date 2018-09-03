@@ -7,4 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :vehicles, dependent: :destroy
+  has_many :requests, dependent: :destroy
+  has_one :account, dependent: :destroy
 end

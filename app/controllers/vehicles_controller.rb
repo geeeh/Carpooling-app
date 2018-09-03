@@ -4,7 +4,7 @@ class VehiclesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @vehicles = Vehicle.where(user_id: current_user)
+    @vehicles = current_user.vehicles
   end
 
   def new
@@ -30,11 +30,10 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.find(params[:id])
     if @vehicle.update_attributes(vehicle_params)
       flash[:notice] = 'vehicles updated!'
-      redirect_to @vehicle
     else
       flash[:error] = 'Failed to edit vehicles!'
-      render :edit
     end
+    redirect_to action: 'index'
   end
 
   def edit
@@ -43,13 +42,12 @@ class VehiclesController < ApplicationController
 
   def destroy
     @vehicle = Vehicle.find(params[:id])
-    if @vehicle.delete
+    if @vehicle.destroy
       flash[:notice] = 'Vehicle deleted!'
-      redirect_to @vehicle
     else
       flash[:error] = 'Failed to delete this vehicles!'
-      render :destroy
     end
+    redirect_to action: 'index'
   end
 
   private
