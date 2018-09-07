@@ -9,6 +9,6 @@ class Vehicle < ApplicationRecord
     maximum: 8
   }, uniqueness: true
 
-  has_many :rides, class_name: 'Ride', foreign_key: 'vehicle_id'
+  has_many :rides, dependent: :destroy
   belongs_to :user, class_name: 'User', foreign_key: 'user_id'
 end

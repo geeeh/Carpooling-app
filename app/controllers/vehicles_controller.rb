@@ -2,6 +2,7 @@
 
 class VehiclesController < ApplicationController
   before_action :authenticate_user!
+  before_action :fetch_vehicle, only: %i[update edit destroy]
 
   def index
     @vehicles = current_user.vehicles
@@ -11,9 +12,7 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.new
   end
 
-  def show
-    @vehicle = Vehicle.find(params[:id])
-  end
+  def show; end
 
   def create
     vehicle = current_user.vehicles.build(vehicle_params)
@@ -27,7 +26,6 @@ class VehiclesController < ApplicationController
   end
 
   def update
-    @vehicle = Vehicle.find(params[:id])
     if @vehicle.update_attributes(vehicle_params)
       flash[:notice] = 'vehicles updated!'
     else
@@ -36,12 +34,9 @@ class VehiclesController < ApplicationController
     redirect_to action: 'index'
   end
 
-  def edit
-    @vehicle = Vehicle.find(params[:id])
-  end
+  def edit; end
 
   def destroy
-    @vehicle = Vehicle.find(params[:id])
     if @vehicle.destroy
       flash[:notice] = 'Vehicle deleted!'
     else
@@ -51,6 +46,10 @@ class VehiclesController < ApplicationController
   end
 
   private
+
+  def fetch_vehicle
+    @vehicle = Vehicle.find(params[:id])
+  end
 
   # we used strong parameters for the validation of params
   def vehicle_params

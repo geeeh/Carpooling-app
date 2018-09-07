@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class RequestsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_account
+  before_action :fetch_single_request, only: %i[destroy edit]
+  before_action :fetch_ride, only: %i[index create destroy]
+
   def index
-    @ride = Ride.find(params[:ride_id])
     @driver = User.find_by(id: @ride.vehicle.user_id)
   end
 
@@ -13,38 +15,33 @@ class RequestsController < ApplicationController
     @request = Requests.new
   end
 
-  def edit
-    @request = Requests.find(params[:id])
-  end
+  def edit; end
 
   def update; end
 
   def create
-    ride = Ride.find(params[:ride_id])
-    request = ride.requests.build(request_params)
-    request.user_id = current_user.id
-    if request.save
+    @request = @ride.requests.new(request_params)
+    @request.user_id = current_user.id
+    if @request.save
       flash[:notice] = 'request made successfully!'
-      ride.remaining_capacity -= 1
-      ride.save
-      redirect_to action: 'index'
+      @ride.decrement(:remaining_capacity)
+      @ride.save
     else
-      flash[:error] = request.errors.messages
-      render :new
+      flash[:alert] = request.errors.messages
     end
+    redirect_to action: 'index'
   end
 
   def destroy
-    @request = Request.find(params[:id])
     @ride = @request.ride
     if @request.delete
       flash[:notice] = 'Request canceled!'
-      @ride.remaining_capacity += 1
+      @ride.increment(:remaining_capacity)
       @ride.save
       redirect_to vehicle_ride_requests_path
     else
       flash[:error] = 'Failed to cancel this request!'
-      render :destroy
+      render :index
     end
   end
 
@@ -52,6 +49,14 @@ class RequestsController < ApplicationController
 
   def request_params
     params.require(:request).permit(:pickup, :dropoff)
+  end
+
+  def fetch_single_request
+    @request = Request.find(params[:id])
+  end
+
+  def fetch_ride
+    @ride = Ride.find(params[:ride_id])
   end
 
   def notify_user(number)

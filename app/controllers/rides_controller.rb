@@ -4,6 +4,8 @@
 # This is the controller responsible on all Ride actions.
 class RidesController < ApplicationController
   before_action :authenticate_user!
+  before_action :fetch_ride, only: %i[show update destroy]
+
   def index
     @vehicle_id = params[:vehicle_id]
     @rides = Ride.where(vehicle_id: @vehicle_id)
@@ -13,13 +15,9 @@ class RidesController < ApplicationController
     @ride = Ride.new
   end
 
-  def show
-    @ride = Ride.find(params[:id])
-  end
+  def show; end
 
-  def edit
-    @ride = Ride.find(params[:id])
-  end
+  def edit; end
 
   def create
     @vehicle = Vehicle.find(params[:vehicle_id])
@@ -33,8 +31,7 @@ class RidesController < ApplicationController
   end
 
   def update
-    ride = Ride.find(params[:id])
-    if ride.update_attributes(ride_params)
+    if @ride.update_attributes(ride_params)
       flash[:notice] = 'ride updated!'
       redirect_to action: 'index'
     else
@@ -44,9 +41,8 @@ class RidesController < ApplicationController
   end
 
   def destroy
-    ride = Ride.find(params[:id])
-    requests = ride.requests
-    if ride.destroy
+    requests = @ride.requests
+    if @ride.destroy
       flash[:notice] = 'Ride canceled!'
       requests.each do |request|
         notify_requester(request.user.account.phone_number)
@@ -55,6 +51,12 @@ class RidesController < ApplicationController
       flash[:alert] = 'Failed to delete this vehicles!'
     end
     redirect_to action: 'index'
+  end
+
+  private
+
+  def fetch_ride
+    @ride = Ride.find(params[:id])
   end
 
   def ride_params
