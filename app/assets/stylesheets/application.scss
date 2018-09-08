@@ -23,7 +23,10 @@ body {
 
 .sign {
   background: linear-gradient(to right, #373B44, #4286f4);
-  height: 100vh;
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .navbar-brand {
@@ -31,6 +34,8 @@ body {
 }
 
 .cover {
+  display: table-cell;
+  vertical-align: middle;
   img {
     width: 50px;
     height: auto;
@@ -54,20 +59,14 @@ nav  {
   }
 }
 
-.center {
-  margin: 0 17%;
-}
 .signup,
 .signin {
   background: #ffffff;
   padding: 20px;
   border-radius: 3px;
   box-shadow: 3px 3px 3px 3px rgba(68, 68, 68, 0.6);
-  top: 50%;
-  width: 30%;
+  width: 500px;
   margin: 0 auto;
-  position: relative;
-  transform: perspective(1px) translateY(50%);
   .btn {
     width: 200px;
     box-shadow: 3px 3px 3px rgba(68, 68, 68, 0.6);
@@ -102,4 +101,20 @@ nav  {
 }
 .help-block {
   color: #B00100;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .sign {
+    min-height: 100vh;
+  }
+
+  .signup,
+  .signin {
+    width: 70%;
+    .btn-warning {
+      margin: auto 20px 10px 20px;
+    }
+  }
+
 }
