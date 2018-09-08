@@ -5,15 +5,19 @@
         <%= image_tag 'voks.svg' %></div>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= form_group_for f, :email, label: false  do %>
       <div class="form-group">
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "jane.doe@gmail.com" %>
       </div>
+      <% end %>
 
+      <%= form_group_for f, :password, label: false  do %>
       <div class="form-group">
         <%= f.label :password %><br />
         <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "password" %>
       </div>
+      <% end %>
 
       <%# if devise_mapping.rememberable? -%>
     <!--    <div class="form-group">-->
@@ -26,6 +30,12 @@
         <%= f.submit "Log in", class: "btn btn-success" %>
         <%= render "devise/shared/links" %>
       </div>
+
+      <% if alert %>
+        <p><%= alert %>!</p>
+    <% elsif notice %>
+      <p><%= notice %>!</p>
+    <% end %>
     <% end %>
 
     </div>

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AccountController < ApplicationController
+class AccountsController < ApplicationController
   before_action :authenticate_user!
   def index
     @account = current_user.account

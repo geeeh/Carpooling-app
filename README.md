@@ -12,6 +12,7 @@ https://cryptic-sands-26436.herokuapp.com/
   - Clone the app by running $ git clone https://github.com/geeeh/Carpooling-app.git
   - Get into the project root folder `$ cd carpooling-app`
   - Install dependencies `$ bundle install`
+  - Run migrations `$ rails db:migrate `
   - Run app `$ rails server`
   To make use of Nexmo messaging:
    create a Nexmo account and include a `.env` in your project file with:

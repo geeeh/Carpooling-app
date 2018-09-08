@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
-require 'date'
-
 # HomeController class is responsible for all Home actions.
 class HomeController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_account
 
   def index
-    date = Time.now
-    @vehicle_id =
-      @rides = Ride.where('time > ?', date).where('remaining_capacity >?', 0)
-    redirect_to account_index_path if current_user.account.nil?
+    @rides = Ride.available_rides
   end
 
   def show
@@ -18,8 +14,7 @@ class HomeController < ApplicationController
   end
 
   def search
-    @rides = Ride.where('lower(origin) like lower(?) OR lower(destination) like lower(?)',
-                        search_params[:origin], search_params[:destination])
+    @rides = Ride.search(search_params)
     render :index
   end
 

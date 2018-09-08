@@ -18,9 +18,3 @@
 //= require popper
 //= require bootstrap
 //= require_tree .
-
-$(document).ready(function() {
-  $("tr[data-link]").click(function() {
-    window.location = $(this).data("link")
-  })
-})

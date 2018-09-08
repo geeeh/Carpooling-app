@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2018_08_29_105813) do
   create_table "requests", force: :cascade do |t|
     t.string "pickup"
     t.string "dropoff"
-    t.boolean "status"
+    t.boolean "status", default: true
     t.bigint "ride_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
